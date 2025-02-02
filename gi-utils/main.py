@@ -42,19 +42,23 @@ def search_with_csv(pdf_path: str, csv_path: str):
 
         with open(csv_path) as fh:
             reader = csv.DictReader(fh)
+
+            if reader.fieldnames:
+                if 'search_term' not in reader.fieldnames:
+                    print(f"Error: column 'search_term' does not exist in csv file: '{csv_path}'")
+
             for row in reader:
                 search_term = row["search_term"]
                 result = [str(i) for i in search_pdf(pdf_path, search_term)]
-
                 writer.writerow({"search_term": search_term, "pages": ",".join(result)})
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "pdf_filename", help="The path to the PDF document to be searched"
+        "pdf_filename", help="The path to the PDF document to be searched."
     )
-    parser.add_argument("csv_filename", help="The term to search in the PDF document")
+    parser.add_argument("csv_filename", help="The CSV file containing a resarch row in every row of the 'search_term' column.")
     args = parser.parse_args()
 
     if not os.path.isfile(args.pdf_filename):
