@@ -4,7 +4,10 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "click>=8.1.8",
+    "pypdf>=5.2.0",
+]
 
 [dependency-groups]
 dev = [
@@ -14,3 +17,7 @@ dev = [
     "mypy>=1.14.1",
     "pre-commit>=4.1.0",
 ]
+
+[tool.black]
+line-length = 120  # Or 120, or any other value you prefer
+
