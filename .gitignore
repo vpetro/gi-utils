@@ -12,3 +12,7 @@ wheels/
 # direnv
 .envrc
 .env.local
+
+# data files
+*.json
+*.csv
